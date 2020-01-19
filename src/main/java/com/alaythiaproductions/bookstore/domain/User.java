@@ -1,12 +1,21 @@
 package com.alaythiaproductions.bookstore.domain;
 
+import com.alaythiaproductions.bookstore.domain.security.Authority;
+import com.alaythiaproductions.bookstore.domain.security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The User class is used for storing user information
  */
 @Entity
-public class User {
+public class User  implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +28,10 @@ public class User {
     private String email;
     private String phone;
     private boolean enabled = true;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -74,5 +87,41 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(userRole -> authorities.add(new Authority(userRole.getRole().getName())));
+
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 }
