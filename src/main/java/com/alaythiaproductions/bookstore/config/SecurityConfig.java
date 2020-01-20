@@ -1,6 +1,7 @@
 package com.alaythiaproductions.bookstore.config;
 
 import com.alaythiaproductions.bookstore.service.UserSecurityService;
+import com.alaythiaproductions.bookstore.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;

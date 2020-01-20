@@ -7,104 +7,120 @@
 <body>
 
 <div th:replace="fragments/navbar  :: navbar"></div>
+<div class="row">
+    <div class="col-md-2 col-lg-3 col-xl-4"></div>
+    <div class="container col-md-8 col-lg-6 col-xl-4">
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-light">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab"
+                       aria-controls="pills-login" aria-selected="true" th:classappend="${classActiveLogin} ? 'active'">Log
+                        In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab"
+                       aria-controls="pills-create" aria-selected="false"
+                       th:classappend="${classActiveCreate} ? 'active'">Create Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-forgot-tab" data-toggle="pill" href="#pills-forgot" role="tab"
+                       aria-controls="pills-forgot" aria-selected="false"
+                       th:classappend="${classActiveForgot} ? 'active'">Forgot Password</a>
+                </li>
+            </ul>
+            <!-- Log In -->
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab"
+                     th:classappend="${classActiveLogin} ? 'active'">
+                    <form class="form-login">
+                        <div class="text-center mb-4">
+                            <img class="mb-4"
+                                 src="https://img.icons8.com/pastel-glyph/64/000000/login-rounded-right.png"
+                                 alt="" width="72" height="72">
+                            <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
+                            <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
+                                pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
+                                    latest Chrome, Safari, and Firefox.</a></p>
+                        </div>
 
-<div class="col-sm-2 col-md-4"></div>
-<div class="container col-sm-8 col-md-4">
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3  bg-light">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Log In</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="false">Create Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-forgot-tab" data-toggle="pill" href="#pills-forgot" role="tab" aria-controls="pills-forgot" aria-selected="false">Forgot Password</a>
-            </li>
-        </ul>
-        <!-- Log In -->
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
-                <form class="form-login">
-                    <div class="text-center mb-4">
-                        <img class="mb-4" src="https://img.icons8.com/pastel-glyph/64/000000/login-rounded-right.png"
-                             alt="" width="72" height="72">
-                        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-                        <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
-                            pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
-                                latest Chrome, Safari, and Firefox.</a></p>
-                    </div>
+                        <div class="form-label-group">
+                            <input type="text" id="loginUsername" class="form-control" placeholder="Username"
+                                   required="required" autofocus="">
+                            <label for="loginUsername">Username</label>
+                        </div>
 
-                    <div class="form-label-group">
-                        <input type="text" id="loginUsername" class="form-control" placeholder="Username"
-                               required="required" autofocus="">
-                        <label for="loginUsername">Username</label>
-                    </div>
+                        <div class="form-label-group">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Password"
+                                   required="required">
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
+                    </form>
+                </div>
 
-                    <div class="form-label-group">
-                        <input type="password" id="loginPassword" class="form-control" placeholder="Password"
-                               required="required">
-                        <label for="loginPassword">Password</label>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
-                </form>
-            </div>
+                <!-- Create Account -->
+                <div class="tab-pane fade" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab"
+                     th:classappend="${classActiveCreate} ? 'active'">
+                    <form class="form-create">
+                        <div class="text-center mb-4">
+                            <img class="mb-4" src="https://img.icons8.com/pastel-glyph/64/000000/create-new--v1.png"
+                                 alt="" width="72" height="72">
+                            <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
+                            <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
+                                pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
+                                    latest Chrome, Safari, and Firefox.</a></p>
+                        </div>
 
-            <!-- Create Account -->
-            <div class="tab-pane fade" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
-                <form class="form-create">
-                    <div class="text-center mb-4">
-                        <img class="mb-4" src="https://img.icons8.com/pastel-glyph/64/000000/create-new--v1.png"
-                             alt="" width="72" height="72">
-                        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-                        <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
-                            pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
-                                latest Chrome, Safari, and Firefox.</a></p>
-                    </div>
+                        <div class="form-label-group">
+                            <input type="email" id="createEmail" class="form-control" placeholder="Email address"
+                                   required="required" autofocus="">
+                            <label for="createEmail">Email address</label>
+                        </div>
 
-                    <div class="form-label-group">
-                        <input type="email" id="createEmail" class="form-control" placeholder="Email address"
-                               required="required" autofocus="">
-                        <label for="createEmail">Email address</label>
-                    </div>
+                        <div class="form-label-group">
+                            <input type="text" id="createUsername" class="form-control" placeholder="Username"
+                                   required="">
+                            <label for="createUsername">Username</label>
+                        </div>
 
-                    <div class="form-label-group">
-                        <input type="text" id="createUsername" class="form-control" placeholder="Username"
-                               required="">
-                        <label for="createUsername">Username</label>
-                    </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+                        <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
+                    </form>
+                </div>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
-                    <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
-                </form>
-            </div>
+                <!-- Forgot Password -->
+                <div class="tab-pane fade" id="pills-forgot" role="tabpanel" aria-labelledby="pills-forgot-tab"
+                     th:classappend="${classActiveForgot} ? 'active'">
+                    <form class="form-forgot">
+                        <div class="text-center mb-4">
+                            <img class="mb-4" src="https://img.icons8.com/ios/100/000000/forgot-password.png"
+                                 alt="" width="72" height="72">
+                            <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
+                            <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
+                                pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
+                                    latest Chrome, Safari, and Firefox.</a></p>
+                        </div>
 
-            <!-- Forgot Password -->
-            <div class="tab-pane fade" id="pills-forgot" role="tabpanel" aria-labelledby="pills-forgot-tab">
-                <form class="form-forgot">
-                    <div class="text-center mb-4">
-                        <img class="mb-4" src="https://img.icons8.com/ios/100/000000/forgot-password.png"
-                             alt="" width="72" height="72">
-                        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-                        <p>Build form controls with floating labels via the <code>:placeholder-shown</code>
-                            pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in
-                                latest Chrome, Safari, and Firefox.</a></p>
-                    </div>
-
-                    <div class="form-label-group">
-                        <input type="email" id="forgotEmail" class="form-control" placeholder="Email address"
-                               required="" autofocus="">
-                        <label for="forgotEmail">Email address</label>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Forgot Password</button>
-                    <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
-                </form>
+                        <div class="form-label-group">
+                            <input type="email" id="forgotEmail" class="form-control" placeholder="Email address"
+                                   required="" autofocus="">
+                            <label for="forgotEmail">Email address</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" id="forgotFirstName" class="form-control" placeholder="First Name"
+                                   required="">
+                            <label for="forgotFirstName"></label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Forgot Password</button>
+                        <p class="mt-5 mb-3 text-muted text-center">© 2020</p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-md-2 col-lg-3 col-xl-4"></div>
 </div>
-<div class="col-sm-2 col-md-4"></div>
 
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>

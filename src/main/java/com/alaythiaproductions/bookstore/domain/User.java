@@ -22,6 +22,7 @@ public class User  implements UserDetails {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     @Column(name = "email", nullable = false, updatable = false)
@@ -47,6 +48,10 @@ public class User  implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
