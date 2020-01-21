@@ -6,8 +6,11 @@ import com.alaythiaproductions.bookstore.domain.security.Role;
 import com.alaythiaproductions.bookstore.domain.security.UserRole;
 import com.alaythiaproductions.bookstore.service.UserSecurityService;
 import com.alaythiaproductions.bookstore.service.impl.UserService;
+import com.alaythiaproductions.bookstore.utility.MailConstructor;
 import com.alaythiaproductions.bookstore.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,24 +37,31 @@ public class HomeController {
     @Autowired
     private UserSecurityService userSecurityService;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private MailConstructor mailConstructor;
+
     @GetMapping({"/", "/index"})
     public String index() {
         return "index";
     }
 
-    @GetMapping("/myAccount")
-    public String myAccount() {
+    @GetMapping(value = "/myAccount")
+    public String myAccount(Model model) {
+        model.addAttribute("classActiveLogin", true);
         return "myAccount";
     }
 
-    @GetMapping("/login")
+    @GetMapping(value = "/login")
     public String login(Model model) {
         model.addAttribute("classActiveLogin", true);
 
         return "myAccount";
     }
 
-    @GetMapping("/createAccount")
+    @GetMapping(value = "/createAccount")
     public String createAccount(Locale locale, @RequestParam("token") String token, Model model) {
         PasswordResetToken passwordResetToken  = userService.getPasswordResetToken(token);
         if (passwordResetToken == null) {
@@ -69,15 +79,14 @@ public class HomeController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        model.addAttribute("classActiveEdit", true);
-        return "myProfile";
+        model.addAttribute("classActiveCreate", true);
+        return "myAccount";
     }
 
     @PostMapping(value = "/createAccount")
-    public String createAccountPost(HttpServletRequest request, @ModelAttribute("email") String userEmail, @ModelAttribute("username") String username, Model model) throws Exception {
-        model.addAttribute("classActiveCreate", true);
-        model.addAttribute("email", userEmail);
-        model.addAttribute("username", username);
+    public String createAccountPost(HttpServletRequest request, @ModelAttribute("createEmail") String userEmail, @ModelAttribute("createUsername") String username, Model model) throws Exception {
+        model.addAttribute("createEmail", userEmail);
+        model.addAttribute("createUsername", username);
 
         if(userService.findByUsername(username) != null) {
             model.addAttribute("usernameExists", true);
@@ -115,11 +124,14 @@ public class HomeController {
         mailSender.send(email);
 
         model.addAttribute("emailSent", true);
+        model.addAttribute("classActiveCreate", true);
+//        model.addAttribute("classActiveLogin", false);
+//        model.addAttribute("classActiveForgot", false);
 
         return "myAccount";
     }
 
-    @GetMapping("/forgotPassword")
+    @GetMapping(value = "/forgotPassword")
     public String forgotPassword(Model model) {
         model.addAttribute("classActiveForgot", true);
 
