@@ -9,7 +9,7 @@
 <div th:replace="fragments/navbar  :: navbar"></div>
 
 <div>
-    <h3 class="text-center"><span th:text="${#strings.toUpperCase(user.username)}"></span></h3>
+    <h3 class="text-center">Hello <span th:text="${#strings.toUpperCase(user.username)}">!</span></h3>
 </div>
 
 <div class="col-sm-2 col-md-4"></div>
@@ -39,8 +39,8 @@
 
         <!-- Edit Account -->
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab"
-                 th:classappend="${classActiveEdit} ? 'active'">
+            <div class="tab-pane fade" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab"
+                 th:classappend="${classActiveEdit} ? 'show active'">
                 <form class="form-edit" th:action="@{/editUserInfo}" method="post">
                     <input type="hidden" name="id" th:value="${user.id}"/>
 
@@ -84,7 +84,7 @@
                                 <span class="input-group-text">@</span>
                             </div>
                             <input type="text" class="form-control" id="editUsername" placeholder="Username"
-                                   required="" name="editUsername" th:value="${user.userName}">
+                                   required="" name="editUsername" th:value="${user.username}" readonly="readonly">
                             <div class="invalid-feedback" style="width: 100%;">
                                 Your username is required.
                             </div>

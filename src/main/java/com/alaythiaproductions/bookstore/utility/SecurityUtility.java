@@ -24,10 +24,12 @@ public interface SecurityUtility {
         Random random = new Random();
 
         while (salt.length() < 18) {
-            int index = (int) (random.nextFloat()*SALTCHARS.length());
+            int index = (int) (random.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
+
         String saltString = salt.toString();
+
         return saltString;
     }
 }

@@ -17,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
@@ -54,7 +51,7 @@ public class HomeController {
         return "myAccount";
     }
 
-    @GetMapping(value = "/login")
+    @RequestMapping(value = "/login")
     public String login(Model model) {
         model.addAttribute("classActiveLogin", true);
 
@@ -79,8 +76,10 @@ public class HomeController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        model.addAttribute("classActiveCreate", true);
-        return "myAccount";
+        model.addAttribute("user", user);
+        model.addAttribute("classActiveEdit", true);
+
+        return "myProfile";
     }
 
     @PostMapping(value = "/createAccount")

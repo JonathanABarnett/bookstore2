@@ -44,19 +44,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected  void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.antMatchers("/**")
-                .antMatchers(PUBLIC_MATCHERS)
-                .permitAll().anyRequest().authenticated();
-
-        http
-                .csrf().disable().cors().disable()
-                .formLogin().failureUrl("/login?error").defaultSuccessUrl("/")
-                .loginPage("/login").permitAll()
+                .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .and()
+                .csrf().disable()
+                .formLogin().loginPage("/login").permitAll()
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
+                .logoutSuccessUrl("/").deleteCookies("rememeber-me").permitAll()
                 .and()
-                .rememberMe();
+                .rememberMe()
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
     }
 
     @Autowired
